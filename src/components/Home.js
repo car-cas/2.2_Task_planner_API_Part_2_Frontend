@@ -14,15 +14,22 @@ class Home extends React.Component{
 
     constructor(props) {
         super(props);
-        this.handleDrawerClose = this.handleDrawerClose.bind(this);
-        this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+        this.state={items:[]}
     }
 
-    state = {
-        open: false,
-        task: []
-    };
-    
+    componentDidMount() {
+        fetch('https://taskplanner-ieti.azurewebsites.net/api/list-task?code=/s20agWQHatQSfQwzv8170axWYxH2ERJMoo6fnIXszWuS7QhOZXTvg==')
+            .then(response =>response.json())
+            .then(data => {
+                var tasks=[]
+                data.forEach(function (task) {
+                    tasks.push(task)    
+                });
+            this.setState({items: tasks});
+            
+            });
+    }
+
     render() {
         const Buttonstyle = {         
             position: "fixed",
@@ -39,23 +46,10 @@ class Home extends React.Component{
                     <AddIcon/>
                 </Fab> 
                 <br/><br/><br/>
-                <CardList
-                    cardList={ localStorage.getItem("items") === null ? [] : JSON.parse(localStorage.getItem("items"))} />
+                <CardList cardList={this.state.items} />
             </div>
         );
     }
-
-    handleDrawerOpen() {
-        this.setState({
-            open: true
-        });
-    };
-
-    handleDrawerClose() {
-        this.setState({
-            open: false
-        });
-    };
 }
 
 Home.propTypes = {

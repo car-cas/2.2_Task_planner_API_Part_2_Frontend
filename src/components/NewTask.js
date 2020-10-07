@@ -22,14 +22,14 @@ export class NewTask extends React.Component {
         this.handleResponsable=this.handleResponsable.bind(this);
         this.handlStatus=this.handlStatus.bind(this);
         this.handleDueDate=this.handleDueDate.bind(this);
-        this.handleSumit=this.handleSumit.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
     render(){
         return (
         <React.Fragment>
             <CssBaseline />
-            <form className="layout" onSubmit={this.handleSumit} >
+            <form className="layout" onSubmit={this.handleSubmit} >
                 <Paper className="paper">
                     <Typography variant="h2">New Task</Typography>
                     <Avatar className="avatar">
@@ -95,7 +95,7 @@ export class NewTask extends React.Component {
       this.setOpen(true);
     };
     
-    handleSumit(e){
+    handleSubmit(e){
         e.preventDefault();
         if (!this.state.descripcion.length || !this.state.responsable.name.length || !this.state.status.length){
           return;

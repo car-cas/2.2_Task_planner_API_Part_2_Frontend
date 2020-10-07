@@ -12,6 +12,7 @@ export class CardList extends React.Component {
             key={i}
             descripcion={cardTask.descripcion}
             name={cardTask.responsable.name}
+            email={cardTask.responsable.email}
             dueDate={cardTask.dueDate}
             status={cardTask.status}
           />
@@ -21,7 +22,7 @@ export class CardList extends React.Component {
 
     return (
       <div className="root">
-        <GridList cellHeight={160} className="gridList" cols={1}>
+        <GridList cellHeight={120} className="gridList" cols={1}>
           {cardList}
         </GridList>
       </div>
