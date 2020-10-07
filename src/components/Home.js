@@ -5,8 +5,7 @@ import {CardList} from "./CardList";
 import AppBar from "@material-ui/core/AppBar";
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
+import {NewTask} from "./NewTask";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -15,6 +14,7 @@ class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state={items:[]}
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -26,27 +26,24 @@ class Home extends React.Component{
                     tasks.push(task)    
                 });
             this.setState({items: tasks});
-            
+                
             });
     }
 
+    handleSubmit(e){
+        this.props.handleSubmit(e);
+    }
+
     render() {
-        const Buttonstyle = {         
-            position: "fixed",
-            bottom: "30px",
-            right:"30px"  
-        }; 
         return (
             <div>
                 <CssBaseline/>
                 <AppBar position="fixed" color="primary">
                     <Toolbar disableGutters={!this.state.open}></Toolbar>                  
                 </AppBar>
-                <Fab color="secondary" aria-label="add" style={Buttonstyle} href="/NewTask">
-                    <AddIcon/>
-                </Fab> 
                 <br/><br/><br/>
                 <CardList cardList={this.state.items} />
+                <NewTask handleSubmit={this.handleSubmit}/>
             </div>
         );
     }
